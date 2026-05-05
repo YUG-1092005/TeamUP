@@ -59,7 +59,7 @@ Create a file named .env inside the server directory. You can copy the structure
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/teamup_db
 JWT_SECRET=enter_a_secure_random_string_here
-CLIENT_URL=http://localhost:5173
+CLIENT_URL=https://teamup-official.vercel.app/
 
 Note: Replace the MONGO_URI with your actual connection string if you are not using a local database.
 
@@ -74,7 +74,7 @@ npm run dev
 Navigate to the client folder and run:
 npm run dev
 
-The frontend will launch at http://localhost:5173.
+The frontend will launch at https://teamup-official.vercel.app/
 
 ## Password Reset (Development Mode)
 To make development easier, the forgot password feature runs in a simulation mode. You do not need an actual email service provider to test it.

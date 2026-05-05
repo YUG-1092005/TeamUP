@@ -2,9 +2,7 @@ const Conversation = require("../models/Conversation");
 const Message = require("../models/Message");
 const jwt = require("jsonwebtoken");
 
-/**
- * SEND MESSAGE (REST + REALTIME)
- */
+
 exports.sendMessage = async (req, res) => {
   try {
     const senderId = req.user.id;
@@ -52,9 +50,7 @@ exports.sendMessage = async (req, res) => {
   }
 };
 
-/**
- * GET MESSAGES FOR A CONVERSATION
- */
+
 exports.getMessages = async (req, res) => {
   try {
     const { conversationId } = req.params;
@@ -76,9 +72,7 @@ exports.getMessages = async (req, res) => {
   }
 };
 
-/**
- * GET INBOX (LEFT PANEL)
- */
+
 exports.getInbox = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -120,9 +114,7 @@ exports.getInbox = async (req, res) => {
   }
 };
 
-/**
- * MARK MESSAGES AS READ
- */
+
 exports.markAsRead = async (req, res) => {
   try {
     const { conversationId } = req.params;
@@ -144,9 +136,6 @@ exports.markAsRead = async (req, res) => {
   }
 };
 
-/**
- * GET CONVERSATIONS (OPTIONAL API)
- */
 exports.getConversations = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -165,37 +154,6 @@ exports.getConversations = async (req, res) => {
   }
 };
 
-/**
- * AUTH MIDDLEWARE
-//  */
-// module.exports.authMiddleware = (req, res, next) => {
-//   const authHeader = req.headers.authorization;
-
-//   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-//     return res.status(401).json({ message: "No token provided" });
-//   }
-
-//   try {
-//     const token = authHeader.split(" ")[1];
-
-//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-//     console.log("DECODED:", decoded);
-
-//     // ✅ FIXED
-//     req.user = { id: decoded.id };
-//     // OR: req.user = decoded;
-
-//     console.log("req.user set to:", req.user);
-
-//     next();
-
-//   } catch (err) {
-//     console.error("JWT ERROR:", err.message);
-//     return res.status(401).json({ message: "Token invalid" });
-//   }
-// };
-
 module.exports.authMiddleware = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
@@ -212,7 +170,6 @@ module.exports.authMiddleware = (req, res, next) => {
 
     console.log("DECODED:", decoded);
 
-    // ✅ Handle both old and new token formats
     const userId = decoded.id || decoded.userId;
 
     if (!userId) {
@@ -235,7 +192,6 @@ module.exports.authMiddleware = (req, res, next) => {
 
 exports.getOrCreateConversation = async (req, res) => {
   try {
-    // ✅ FIXED HERE
     const userId = req.user?.id;
 
     const { otherUserId } = req.params;

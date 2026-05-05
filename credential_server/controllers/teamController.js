@@ -9,7 +9,6 @@ const User = require("../models/User");
 const { Resend } = require("resend");
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// ─── Nodemailer transporter ───────────────────────────────────────────────────
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
@@ -21,7 +20,6 @@ const transporter = nodemailer.createTransport({
   connectionTimeout: 15000,
 });
 
-// ─── createTeam ──────────────────────────────────────────────────────────────
 exports.createTeam = async (req, res) => {
   try {
     const { name, projectIdea, description, requiredSkills, maxMembers } =
@@ -44,7 +42,6 @@ exports.createTeam = async (req, res) => {
   }
 };
 
-// ─── inviteMember ─────────────────────────────────────────────────────────────
 exports.inviteMember = async (req, res) => {
   try {
     const { teamId } = req.params;
@@ -108,7 +105,6 @@ exports.inviteMember = async (req, res) => {
   }
 };
 
-// ─── acceptInvite ─────────────────────────────────────────────────────────────
 exports.acceptInvite = async (req, res) => {
   try {
     const { token } = req.params;
@@ -153,7 +149,6 @@ exports.acceptInvite = async (req, res) => {
   }
 };
 
-// ─── getInviteInfo (public – for invite page before login) ────────────────────
 exports.getInviteInfo = async (req, res) => {
   try {
     const { token } = req.params;
@@ -170,7 +165,6 @@ exports.getInviteInfo = async (req, res) => {
   }
 };
 
-// ─── getTeamWorkspace ─────────────────────────────────────────────────────────
 exports.getTeamWorkspace = async (req, res) => {
   try {
     const { teamId } = req.params;
@@ -203,7 +197,6 @@ exports.getTeamWorkspace = async (req, res) => {
   }
 };
 
-// ─── getUserTeams ─────────────────────────────────────────────────────────────
 exports.getUserTeams = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -216,7 +209,6 @@ exports.getUserTeams = async (req, res) => {
   }
 };
 
-// ─── addTask ──────────────────────────────────────────────────────────────────
 exports.addTask = async (req, res) => {
   try {
     const { teamId } = req.params;
@@ -248,7 +240,6 @@ exports.addTask = async (req, res) => {
   }
 };
 
-// ─── updateTaskStatus ─────────────────────────────────────────────────────────
 exports.updateTaskStatus = async (req, res) => {
   try {
     const { taskId } = req.params;
@@ -281,7 +272,7 @@ exports.updateTaskStatus = async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 };
-// ─── addResource ──────────────────────────────────────────────────────────────
+
 exports.addResource = async (req, res) => {
   try {
     const { teamId } = req.params;
@@ -309,7 +300,6 @@ exports.addResource = async (req, res) => {
   }
 };
 
-// ─── sendMessage ──────────────────────────────────────────────────────────────
 exports.sendMessage = async (req, res) => {
   try {
     const { teamId } = req.params;
@@ -332,7 +322,6 @@ exports.sendMessage = async (req, res) => {
   }
 };
 
-// ─── getMessages ──────────────────────────────────────────────────────────────
 exports.getMessages = async (req, res) => {
   try {
     const { teamId } = req.params;
@@ -356,7 +345,6 @@ exports.getMessages = async (req, res) => {
   }
 };
 
-// ─── removeMember ─────────────────────────────────────────────────────────────
 exports.removeMember = async (req, res) => {
   try {
     const { teamId, userId: targetId } = req.params;
@@ -382,7 +370,6 @@ exports.removeMember = async (req, res) => {
   }
 };
 
-// ─── leaveTeam ────────────────────────────────────────────────────────────────
 exports.leaveTeam = async (req, res) => {
   try {
     const { teamId } = req.params;
