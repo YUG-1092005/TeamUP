@@ -162,7 +162,7 @@ export default function Dashboard() {
       <div className="welcome-card">
         <div className="dashboad-avatar-wrapper">
           <img
-            src={avatar || avatarMap[user.gender] || avatarMap.others}
+            src={avatarMap[user.gender] || avatarMap.others}
             alt="avatar"
             className="dashboad-avatar"
           />
